@@ -142,6 +142,7 @@ int main(int argc, char ** argv){
           //sprintf(cmnd, "./gen_size_distr %06.2f 0 ../Boxes/sphere_xH_nohalos_nf*_eff%.1f_effPLindex%.1f_HIIfilter%i_Mmin%.1e_RHIImax%.0f_z%06.2f_%i_%.0fMpc", Z, ion_eff, EFF_FACTOR_PL_INDEX, HII_FILTER, M_MIN, R_BUBBLE_MAX, Z, HII_DIM, BOX_LEN);
           sprintf(cmnd, "./gen_size_distr %06.2f 0 ../Boxes/sphere_xH_nohalos_nf*_eff%.1f_effPLindex%.1f_HIIfilter%i_Mmin%.1e_RHIImax%.0f_z%06.2f_%i_%.0fMpc", Z, ion_eff, HII_EFF_FACTOR, HII_FILTER, M_MIN, R_BUBBLE_MAX, Z, HII_DIM, BOX_LEN);
         }
+        break;
     }
     time(&curr_time);
     fprintf(stderr, "Now calling: %s, %g min have ellapsed\n", cmnd, difftime(start_time, curr_time)/60.0);
@@ -173,6 +174,7 @@ int main(int argc, char ** argv){
           //sprintf(cmnd, "./gen_size_distr %06.2f 1 ../Boxes/sphere_xH_nohalos_nf*_eff%.1f_effPLindex%.1f_HIIfilter%i_Mmin%.1e_RHIImax%.0f_z%06.2f_%i_%.0fMpc", Z, ion_eff, EFF_FACTOR_PL_INDEX, HII_FILTER, M_MIN, R_BUBBLE_MAX, Z, HII_DIM, BOX_LEN);
           sprintf(cmnd, "./gen_size_distr %06.2f 1 ../Boxes/sphere_xH_nohalos_nf*_eff%.1f_effPLindex%.1f_HIIfilter%i_Mmin%.1e_RHIImax%.0f_z%06.2f_%i_%.0fMpc", Z, ion_eff, HII_EFF_FACTOR, HII_FILTER, M_MIN, R_BUBBLE_MAX, Z, HII_DIM, BOX_LEN);
         }
+        break;
     }
     time(&curr_time);
     fprintf(stderr, "Now calling: %s, %g min have ellapsed\n", cmnd, difftime(start_time, curr_time)/60.0);
@@ -202,6 +204,7 @@ int main(int argc, char ** argv){
         	//sprintf(cmnd, "./delta_T %06.2f ../Boxes/sphere_xH_nohalos_z%06.2f_nf*_eff%.1f_effPLindex%.1f_HIIfilter%i_Mmin%.1e_RHIImax%.0f_%i_%.0fMpc", Z, Z, ion_eff, EFF_FACTOR_PL_INDEX,HII_FILTER, M_MIN, R_BUBBLE_MAX, HII_DIM, BOX_LEN);
         	sprintf(cmnd, "./delta_T %06.2f ../Boxes/sphere_xH_nohalos_z%06.2f_nf*_eff%.1f_effPLindex%.1f_HIIfilter%i_Mmin%.1e_RHIImax%.0f_%i_%.0fMpc", Z, Z, ion_eff, HII_EFF_FACTOR,HII_FILTER, M_MIN, R_BUBBLE_MAX, HII_DIM, BOX_LEN);
         }
+        break;
     }
     time(&curr_time);
     fprintf(stderr, "Now calling: %s, %g min have ellapsed\n", cmnd, difftime(start_time, curr_time)/60.0);
