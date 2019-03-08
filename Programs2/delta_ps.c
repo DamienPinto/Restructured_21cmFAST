@@ -43,40 +43,40 @@ int main(int argc, char ** argv){
     fftwf_cleanup_threads(); return -1;
   }
   F = fopen(argv[1], "rb");
-  switch (FORMAT){
+  switch(FORMAT){
     // FFT format
-  case 1:
-    fprintf(stderr, "Reading in FFT padded deltax box\n");
-    if (mod_fread(deltax, sizeof(fftwf_complex)*HII_KSPACE_NUM_PIXELS, 1, F)!=1){
-      fftwf_free(deltax);
-      fprintf(stderr, "deltax_ps.c: unable to read-in file\nAborting\n");
-      fftwf_cleanup_threads(); return -1;
-    }
-    break;
+    case 1:
+      fprintf(stderr, "Reading in FFT padded deltax box\n");
+      if (mod_fread(deltax, sizeof(fftwf_complex)*HII_KSPACE_NUM_PIXELS, 1, F)!=1){
+        fftwf_free(deltax);
+        fprintf(stderr, "deltax_ps.c: unable to read-in file\nAborting\n");
+        fftwf_cleanup_threads(); return -1;
+      }
+      break;
 
     // unpaded format
-  case 0:
-    fprintf(stderr, "Reading in unpadded box\n");
-    for (i=0; i<HII_DIM; i++){
-      for (j=0; j<HII_DIM; j++){
-        for (k=0; k<HII_DIM; k++){
-          if (fread((float *)deltax + HII_R_FFT_INDEX(i,j,k), sizeof(float), 1, F)!=1){
-            fprintf(stderr, "init.c: Read error occured!\n");
-            fftwf_free(deltax);
-            fftwf_cleanup_threads(); return -1;	    
-          }
-      	  ave += *((float *)deltax + HII_R_FFT_INDEX(i,j,k));
+    case 0:
+      fprintf(stderr, "Reading in unpadded box\n");
+      for (i=0; i<HII_DIM; i++){
+        for (j=0; j<HII_DIM; j++){
+	  for (k=0; k<HII_DIM; k++){
+	    if (fread((float *)deltax + HII_R_FFT_INDEX(i,j,k), sizeof(float), 1, F)!=1){
+	      fprintf(stderr, "init.c: Read error occured!\n");
+	      fftwf_free(deltax);
+	      fftwf_cleanup_threads(); return -1;	    
+	    }
+	    ave += *((float *)deltax + HII_R_FFT_INDEX(i,j,k));
+	  }
         }
       }
-    }
-    ave /= (double)HII_TOT_NUM_PIXELS;
-    fprintf(stderr, "Average is %e\n", ave);
-    break;
+      ave /= (double)HII_TOT_NUM_PIXELS;
+      fprintf(stderr, "Average is %e\n", ave);
+      break;
 
-  default:
-    fprintf(stderr, "Wrong format code\naborting...\n");
-    fftwf_free(deltax);
-    fftwf_cleanup_threads(); return -1;	    
+    default:
+      fprintf(stderr, "Wrong format code\naborting...\n");
+      fftwf_free(deltax);
+      fftwf_cleanup_threads(); return -1;	    
   }
   fclose(F);
 
