@@ -158,19 +158,19 @@ int main(int argc, char ** argv){
 
     // do temperature map
     switch(FIND_BUBBLE_ALGORITHM){
-    case 2:
-      if (USE_HALO_FIELD)
-        sprintf(cmnd, "./delta_T %06.2f ../Boxes/xH_z%06.2f_nf*_%i_%.0fMpc ../Boxes/Ts_z%06.2f_*_%.0fMpc", Z, Z, HII_DIM, BOX_LEN, Z, BOX_LEN);
-      else
-        sprintf(cmnd, "./delta_T %06.2f ../Boxes/xH_nohalos_z%06.2f_nf*_%i_%.0fMpc ../Boxes/Ts_z%06.2f_*_%.0fMpc", Z, Z, HII_DIM, BOX_LEN, Z, BOX_LEN);
-      break;
-    default:
-      if (USE_HALO_FIELD)
-        sprintf(cmnd, "./delta_T %06.2f ../Boxes/sphere_xH_z%06.2f_nf*_%i_%.0fMpc ../Boxes/Ts_z%06.2f_*_%.0fMpc", Z, Z, HII_DIM, BOX_LEN, Z, BOX_LEN);
-      else
-        sprintf(cmnd, "./delta_T %06.2f ../Boxes/sphere_xH_nohalos_z%06.2f_nf*_%i_%.0fMpc ../Boxes/Ts_z%06.2f_*_%.0fMpc", Z, Z, HII_DIM, BOX_LEN, Z, BOX_LEN);
-      break;
-    }
+      case 2:
+        if (USE_HALO_FIELD)
+          sprintf(cmnd, "./delta_T %06.2f ../Boxes/xH_z%06.2f_nf*_%i_%.0fMpc ../Boxes/Ts_z%06.2f_*_%.0fMpc", Z, Z, HII_DIM, BOX_LEN, Z, BOX_LEN);
+        else
+          sprintf(cmnd, "./delta_T %06.2f ../Boxes/xH_nohalos_z%06.2f_nf*_%i_%.0fMpc ../Boxes/Ts_z%06.2f_*_%.0fMpc", Z, Z, HII_DIM, BOX_LEN, Z, BOX_LEN);
+        break;
+      default:
+        if (USE_HALO_FIELD)
+          sprintf(cmnd, "./delta_T %06.2f ../Boxes/sphere_xH_z%06.2f_nf*_%i_%.0fMpc ../Boxes/Ts_z%06.2f_*_%.0fMpc", Z, Z, HII_DIM, BOX_LEN, Z, BOX_LEN);
+        else
+          sprintf(cmnd, "./delta_T %06.2f ../Boxes/sphere_xH_nohalos_z%06.2f_nf*_%i_%.0fMpc ../Boxes/Ts_z%06.2f_*_%.0fMpc", Z, Z, HII_DIM, BOX_LEN, Z, BOX_LEN);
+        break;
+      }
     time(&curr_time);
     fprintf(stderr, "Now calling: %s, %g min have ellapsed\n", cmnd, -difftime(start_time, curr_time)/60.0);
     fprintf(LOG, "Now calling: %s, %g min have ellapsed\n", cmnd, -difftime(start_time, curr_time)/60.0);
