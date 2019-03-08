@@ -77,46 +77,46 @@ int main(int argc, char ** argv){
         return -1;
       }
     
-    for(i=0; i<HII_DIM; i++){
-      for(j=0; j<HII_DIM; j++){
-        for(k=0; k<HII_DIM; k++){
-          *((float *)box + HII_R_FFT_INDEX(i,j,k)) += 1;
-          if(*((float *)box + HII_R_FFT_INDEX(i,j,k)) < 0){
-            fprintf(stderr, "Less than 0???\n");
+      for(i=0; i<HII_DIM; i++){
+        for(j=0; j<HII_DIM; j++){
+          for(k=0; k<HII_DIM; k++){
+            *((float *)box + HII_R_FFT_INDEX(i,j,k)) += 1;
+            if(*((float *)box + HII_R_FFT_INDEX(i,j,k)) < 0){
+              fprintf(stderr, "Less than 0???\n");
+            }
           }
         }
       }
-    }
     
-    //convert \delta -> \Delta
-    //    for (ct=0; ct<HII_KSPACE_NUM_PIXELS; ct++){ box[ct] += 1;}
-    break;
+      //convert \delta -> \Delta
+      //    for (ct=0; ct<HII_KSPACE_NUM_PIXELS; ct++){ box[ct] += 1;}
+      break;
 
     // Hy format
-  case 0:
-    for(i=0; i<HII_DIM; i++){
-      for(j=0; j<HII_DIM; j++){
-        for(k=0; k<HII_DIM; k++){
-          if(fread((float *)box + HII_R_FFT_INDEX(k,j,i), sizeof(float), 1, F)!=1){
-            fprintf(stderr, "init.c: Read error occured!\n");
-            fftwf_free(box); fclose(F);
-            return -1;	    
-          }
-	  	    *((float *)box + HII_R_FFT_INDEX(k,j,i)) += 1; // convert to Ddelta
+    case 0:
+      for(i=0; i<HII_DIM; i++){
+        for(j=0; j<HII_DIM; j++){
+          for(k=0; k<HII_DIM; k++){
+            if(fread((float *)box + HII_R_FFT_INDEX(k,j,i), sizeof(float), 1, F)!=1){
+              fprintf(stderr, "init.c: Read error occured!\n");
+              fftwf_free(box); fclose(F);
+              return -1;	    
+            }
+	    *((float *)box + HII_R_FFT_INDEX(k,j,i)) += 1; // convert to Ddelta
 
-          //*((float *)box + HII_R_FFT_INDEX(k,j,i)) *= *((float *)box + HII_R_FFT_INDEX(k,j,i));
+            //*((float *)box + HII_R_FFT_INDEX(k,j,i)) *= *((float *)box + HII_R_FFT_INDEX(k,j,i));
 
-          if (*((float *)box + HII_R_FFT_INDEX(k,j,i)) < 0){
-            fprintf(stderr, "Less than 0???, %e\n", *((float *)box + HII_R_FFT_INDEX(k,j,i)));
-          }
-        } // k
-      } // j
-    } // i
-    break;
-  default:
-    fprintf(stderr, "Wrong format code\naborting...\n");
-    fftwf_free(box);
-    return -1;	    
+            if (*((float *)box + HII_R_FFT_INDEX(k,j,i)) < 0){
+              fprintf(stderr, "Less than 0???, %e\n", *((float *)box + HII_R_FFT_INDEX(k,j,i)));
+            }
+          } // k
+        } // j
+      } // i
+      break;
+    default:
+      fprintf(stderr, "Wrong format code\naborting...\n");
+      fftwf_free(box);
+      return -1;	    
   }
   fclose(F);
 
