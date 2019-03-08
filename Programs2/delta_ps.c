@@ -76,7 +76,8 @@ int main(int argc, char ** argv){
     default:
       fprintf(stderr, "Wrong format code\naborting...\n");
       fftwf_free(deltax);
-      fftwf_cleanup_threads(); return -1;	    
+      fftwf_cleanup_threads(); return -1;	
+      break;
   }
   fclose(F);
 
