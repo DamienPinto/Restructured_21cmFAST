@@ -174,6 +174,7 @@ int main(int argc, char ** argv){
     case 3:  sprintf(filename, "../Boxes/updated_vz_z%06.2f_%i_%.0fMpc", REDSHIFT, HII_DIM, BOX_LEN);
       break;
     default: sprintf(filename, "../Boxes/updated_vy_z%06.2f_%i_%.0fMpc", REDSHIFT, HII_DIM, BOX_LEN);
+      break;
   }
   if(T_USE_VELOCITIES){
     if(!(F=fopen(filename, "rb"))){
@@ -325,14 +326,15 @@ int main(int argc, char ** argv){
 
         	// take partial deriavative along the line of sight
         	switch(VELOCITY_COMPONENT){
-          	case 1:
-          	  *((fftwf_complex *) v + HII_C_INDEX(n_x,n_y,n_z)) *= k_x*I/(float)HII_TOT_NUM_PIXELS;
-          	  break;
-          	case 3:
-          	  *((fftwf_complex *) v + HII_C_INDEX(n_x,n_y,n_z)) *= k_z*I/(float)HII_TOT_NUM_PIXELS;
-          	  break;
-          	default:
-          	  *((fftwf_complex *) v + HII_C_INDEX(n_x,n_y,n_z)) *= k_y*I/(float)HII_TOT_NUM_PIXELS;
+          	  case 1:
+          	    *((fftwf_complex *) v + HII_C_INDEX(n_x,n_y,n_z)) *= k_x*I/(float)HII_TOT_NUM_PIXELS;
+          	    break;
+          	  case 3:
+          	    *((fftwf_complex *) v + HII_C_INDEX(n_x,n_y,n_z)) *= k_z*I/(float)HII_TOT_NUM_PIXELS;
+          	    break;
+          	  default:
+          	    *((fftwf_complex *) v + HII_C_INDEX(n_x,n_y,n_z)) *= k_y*I/(float)HII_TOT_NUM_PIXELS;
+		    break;
         	}
         } // n_z
       } // n_y
